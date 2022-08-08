@@ -4,7 +4,7 @@
     <parent>
         <groupId>za.ac.uj.otp</groupId>
         <artifactId>otp-ds</artifactId>
-        <version>1.0.0</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>otp-service</artifactId>
     <packaging>jar</packaging>

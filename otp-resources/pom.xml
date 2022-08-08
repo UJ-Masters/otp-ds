@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>za.ac.uj.otp</groupId>
+		<artifactId>otp-ds</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<artifactId>otp-resources</artifactId>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>dev</module>
+		<module>test</module>
+	</modules>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.spotify</groupId>
+					<artifactId>docker-maven-plugin</artifactId>
+					<configuration>
+						<baseImage>${dockerImageName}:latest</baseImage>
+						<resources>
+							<resource>
+								<directory>${project.basedir}/src/main/resources/</directory>
+								<targetPath>/dsenv</targetPath>
+								<include>*/**</include>
+							</resource>
+						</resources>
+						<pullOnBuild>false</pullOnBuild>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+</project>

@@ -1,4 +1,4 @@
-package za.ac.uj.otp.exception;
+package za.ac.uj.masters.otp.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

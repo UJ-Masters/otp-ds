@@ -1,4 +1,4 @@
-package za.ac.uj.otp.exception;
+package za.ac.uj.masters.otp.exception;
 
 public class SomethingWentWrongException extends RuntimeException {
     public SomethingWentWrongException(String message) {

@@ -1,4 +1,4 @@
-package za.ac.uj.otp.model.send;
+package za.ac.uj.masters.otp.model.send;
 
 public class SendResponse {
     private boolean result;

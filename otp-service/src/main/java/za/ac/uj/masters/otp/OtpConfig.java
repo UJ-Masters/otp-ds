@@ -1,4 +1,4 @@
-package za.ac.uj.otp;
+package za.ac.uj.masters.otp;
 
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;

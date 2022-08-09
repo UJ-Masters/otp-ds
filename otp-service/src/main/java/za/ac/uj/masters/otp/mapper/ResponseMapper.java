@@ -1,7 +1,7 @@
-package za.ac.uj.otp.mapper;
+package za.ac.uj.masters.otp.mapper;
 
 import org.springframework.stereotype.Component;
-import za.ac.uj.otp.model.send.SendResponse;
+import za.ac.uj.masters.otp.model.send.SendResponse;
 
 @Component
 public class ResponseMapper {

@@ -1,13 +1,13 @@
-package za.ac.uj.otp.model.validate;
+package za.ac.uj.masters.otp.model.send;
 
-import za.ac.uj.otp.model.DeliveryType;
+import za.ac.uj.masters.otp.model.DeliveryType;
 
-public class ValidateRequest {
+public class SendRequest {
 
     private String email;
     private String mobileNumber;
     private DeliveryType deliveryType;
-    private String otp;
+    private String message;
 
     public String getEmail() {
         return email;
@@ -33,11 +33,11 @@ public class ValidateRequest {
         this.deliveryType = deliveryType;
     }
 
-    public String getOtp() {
-        return otp;
+    public String getMessage() {
+        return message;
     }
 
-    public void setOtp(String otp) {
-        this.otp = otp;
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

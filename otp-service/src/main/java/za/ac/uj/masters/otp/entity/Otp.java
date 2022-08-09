@@ -1,4 +1,4 @@
-package za.ac.uj.otp.entity;
+package za.ac.uj.masters.otp.entity;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package za.ac.uj.otp.service;
+package za.ac.uj.masters.otp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,10 +10,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import za.ac.uj.otp.exception.SomethingWentWrongException;
-import za.ac.uj.otp.mapper.ResponseMapper;
-import za.ac.uj.otp.model.send.SendRequest;
-import za.ac.uj.otp.model.send.SendResponse;
+import za.ac.uj.masters.otp.exception.SomethingWentWrongException;
+import za.ac.uj.masters.otp.mapper.ResponseMapper;
+import za.ac.uj.masters.otp.model.send.SendRequest;
+import za.ac.uj.masters.otp.model.send.SendResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import java.net.URI;

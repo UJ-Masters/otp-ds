@@ -1,4 +1,4 @@
-package za.ac.uj.otp.service;
+package za.ac.uj.masters.otp.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientException;
-import za.ac.uj.otp.entity.Otp;
-import za.ac.uj.otp.exception.SomethingWentWrongException;
-import za.ac.uj.otp.model.DeliveryType;
-import za.ac.uj.otp.model.send.SendRequest;
-import za.ac.uj.otp.model.send.SendResponse;
-import za.ac.uj.otp.model.validate.ValidateRequest;
-import za.ac.uj.otp.model.validate.ValidateResponse;
-import za.ac.uj.otp.repo.OtpRepository;
-import za.ac.uj.otp.util.AESUtil;
+import za.ac.uj.masters.otp.entity.Otp;
+import za.ac.uj.masters.otp.exception.SomethingWentWrongException;
+import za.ac.uj.masters.otp.model.DeliveryType;
+import za.ac.uj.masters.otp.model.send.SendRequest;
+import za.ac.uj.masters.otp.model.send.SendResponse;
+import za.ac.uj.masters.otp.model.validate.ValidateRequest;
+import za.ac.uj.masters.otp.model.validate.ValidateResponse;
+import za.ac.uj.masters.otp.repo.OtpRepository;
+import za.ac.uj.masters.otp.util.AESUtil;
 
 import java.net.URISyntaxException;
 import java.time.LocalDateTime;

@@ -1,4 +1,4 @@
-package za.ac.uj.otp.util;
+package za.ac.uj.masters.otp.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -2,7 +2,7 @@
 FROM maven:3.8-openjdk-11 as build
 WORKDIR /app
 COPY . .
-RUN mvn package -X -U
+RUN mvn package
 
 # Inject the JAR file into a new container to keep the file small
 FROM openjdk:8-jre-alpine

@@ -22,7 +22,9 @@ public class OtpApplication {
         return (evt) -> {
             Integer port = serverProperties.getPort();
 
-            logger.info("OTP-DS started: http://localhost:{}/otp/swagger-ui.html to use otp-ds", port);
+            String contextPath = "otp";
+
+            logger.info("OTP-DS started: http://localhost:{}/{}/swagger-ui.html to use otp-ds", port, contextPath);
         };
     }
 }

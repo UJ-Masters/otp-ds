@@ -25,7 +25,8 @@ public class SecurityConfig {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/send/**", "/validate/**")
+                .antMatchers(HttpMethod.POST,
+                        "/send/**", "/validate/**")
                 .hasAuthority("SCOPE_write")
                 .anyRequest()
                 .authenticated()

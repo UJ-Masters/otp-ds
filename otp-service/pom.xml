@@ -18,6 +18,10 @@
         <!-- 3rd party -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
         <dependency>
@@ -73,6 +77,15 @@
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>1.6.9</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -116,7 +129,7 @@
                 <dependency>
                     <groupId>za.ac.uj.masters.otp</groupId>
                     <artifactId>dev</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
+                    <version>${project.version}</version>
                 </dependency>
             </dependencies>
         </profile>
@@ -127,7 +140,7 @@
                 <dependency>
                     <groupId>za.ac.uj.masters.otp</groupId>
                     <artifactId>local</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
+                    <version>${project.version}</version>
                 </dependency>
             </dependencies>
         </profile>
@@ -138,7 +151,7 @@
                 <dependency>
                     <groupId>za.ac.uj.masters.otp</groupId>
                     <artifactId>test</artifactId>
-                    <version>1.0.0-SNAPSHOT</version>
+                    <version>${project.version}</version>
                 </dependency>
             </dependencies>
         </profile>

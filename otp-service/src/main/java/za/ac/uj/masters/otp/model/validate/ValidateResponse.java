@@ -7,8 +7,7 @@ public class ValidateResponse {
         this.result = result;
     }
 
-    /*@Override
-    public String toString() {
-        return String.format("result => %s", result);
-    }*/
+    public boolean isResult() {
+        return result;
+    }
 }

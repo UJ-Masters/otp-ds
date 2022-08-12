@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods("HEAD", "GET", "PUT", "POST", "DELETE", "PATCH");
     }
 
-    @Bean
+    /*@Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
 
         RestTemplate restTemplate = builder.build();
@@ -33,5 +33,5 @@ public class WebConfig implements WebMvcConfigurer {
                                 new FormHttpMessageConverter()));
 
         return builder.build();
-    }
+    }*/
 }

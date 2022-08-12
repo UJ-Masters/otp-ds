@@ -36,6 +36,7 @@ public class OtpController {
     @ResponseBody
     public ValidateResponse validateOtp(HttpServletRequest servletRequest, @RequestBody ValidateRequest request) {
         boolean override = Boolean.parseBoolean(servletRequest.getHeader("Override"));
+        logger.info("isOverride on ? = {}", override);
         return otpService.validateOtp(request, override);
     }
 

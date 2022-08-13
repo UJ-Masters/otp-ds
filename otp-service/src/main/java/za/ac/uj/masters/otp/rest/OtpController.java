@@ -9,32 +9,52 @@ import za.ac.uj.masters.otp.model.send.SendResponse;
 import za.ac.uj.masters.otp.model.validate.ValidateRequest;
 import za.ac.uj.masters.otp.model.validate.ValidateResponse;
 import za.ac.uj.masters.otp.service.OtpService;
+import za.ac.uj.masters.otp.service.OtpServiceV2;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.URISyntaxException;
 
-@RestController
+@RestController("/v1.0")
 @CrossOrigin({"*"})
 public class OtpController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private final OtpService otpService;
+    private final OtpServiceV2 otpServiceV2;
+
 
     @Autowired
-    public OtpController(OtpService otpService) {
+    public OtpController(OtpService otpService,
+                         OtpServiceV2 otpServiceV2) {
         this.otpService = otpService;
+        this.otpServiceV2 = otpServiceV2;
     }
 
 
-    @PostMapping("/send")
+    @PostMapping("/v1/send")
     @ResponseBody
     public SendResponse sendOtp(@RequestBody SendRequest request) {
         return otpService.sendOtp(request);
     }
 
-    @PostMapping("/validate")
+    @PostMapping("/v1/validate")
     @ResponseBody
     public ValidateResponse validateOtp(HttpServletRequest servletRequest, @RequestBody ValidateRequest request) {
+        boolean override = Boolean.parseBoolean(servletRequest.getHeader("Override"));
+        logger.info("isOverride on ? = {}", override);
+        return otpService.validateOtp(request, override);
+    }
+
+    @PostMapping("/v2/send")
+    @ResponseBody
+    public SendResponse sendOtpV2(@RequestBody SendRequest request) throws URISyntaxException {
+        return otpService.sendOtp(request);
+    }
+
+    @PostMapping("/v2/validate")
+    @ResponseBody
+    public ValidateResponse validateOtpV2(HttpServletRequest servletRequest, @RequestBody ValidateRequest request) {
         boolean override = Boolean.parseBoolean(servletRequest.getHeader("Override"));
         logger.info("isOverride on ? = {}", override);
         return otpService.validateOtp(request, override);

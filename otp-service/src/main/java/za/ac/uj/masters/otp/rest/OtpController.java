@@ -17,20 +17,16 @@ import java.net.URISyntaxException;
 @RestController("/v1.0")
 @CrossOrigin({"*"})
 public class OtpController {
-
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
     private final OtpService otpService;
     private final OtpServiceV2 otpServiceV2;
 
-
     @Autowired
-    public OtpController(OtpService otpService,
-                         OtpServiceV2 otpServiceV2) {
+    public OtpController(final OtpService otpService,
+                         final OtpServiceV2 otpServiceV2) {
         this.otpService = otpService;
         this.otpServiceV2 = otpServiceV2;
     }
-
 
     @PostMapping("/v1/send")
     @ResponseBody
@@ -40,7 +36,8 @@ public class OtpController {
 
     @PostMapping("/v1/validate")
     @ResponseBody
-    public ValidateResponse validateOtp(HttpServletRequest servletRequest, @RequestBody ValidateRequest request) {
+    public ValidateResponse validateOtp(final HttpServletRequest servletRequest,
+                                        @RequestBody ValidateRequest request) {
         boolean override = Boolean.parseBoolean(servletRequest.getHeader("Override"));
         logger.info("isOverride on ? = {}", override);
         return otpService.validateOtp(request, override);
@@ -54,7 +51,8 @@ public class OtpController {
 
     @PostMapping("/v2/validate")
     @ResponseBody
-    public ValidateResponse validateOtpV2(HttpServletRequest servletRequest, @RequestBody ValidateRequest request) {
+    public ValidateResponse validateOtpV2(final HttpServletRequest servletRequest,
+                                          @RequestBody ValidateRequest request) {
         boolean override = Boolean.parseBoolean(servletRequest.getHeader("Override"));
         logger.info("isOverride on ? = {}", override);
         return otpService.validateOtp(request, override);

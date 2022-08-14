@@ -46,7 +46,7 @@ public class OtpController {
     @PostMapping("/v2/send")
     @ResponseBody
     public SendResponse sendOtpV2(@RequestBody SendRequest request) throws URISyntaxException {
-        return otpService.sendOtp(request);
+        return otpServiceV2.sendOtp(request);
     }
 
     @PostMapping("/v2/validate")
@@ -55,7 +55,7 @@ public class OtpController {
                                           @RequestBody ValidateRequest request) {
         boolean override = Boolean.parseBoolean(servletRequest.getHeader("Override"));
         logger.info("isOverride on ? = {}", override);
-        return otpService.validateOtp(request, override);
+        return otpServiceV2.validateOtp(request, override);
     }
 
 }

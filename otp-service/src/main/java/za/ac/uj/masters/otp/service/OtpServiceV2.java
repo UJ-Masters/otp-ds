@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class OtpServiceV2 {
 
     private final Logger log = LoggerFactory.getLogger(OtpServiceV2.class);
-    private static final Integer EXPIRE_MINS = 5;
+    private static final Integer EXPIRE_MINS = 1;
     private LoadingCache otpCache;
 
     private final CommunicationService communicationService;
@@ -122,7 +122,4 @@ public class OtpServiceV2 {
         }
         return response;
     }
-
-
-
-    }
+}

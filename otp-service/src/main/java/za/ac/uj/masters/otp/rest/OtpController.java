@@ -12,7 +12,9 @@ import za.ac.uj.masters.otp.service.OtpService;
 import za.ac.uj.masters.otp.service.OtpServiceV2;
 
 import javax.servlet.http.HttpServletRequest;
-import java.net.URISyntaxException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 @RestController("/v1.0")
 @CrossOrigin({"*"})
@@ -45,7 +47,16 @@ public class OtpController {
 
     @PostMapping("/v2/send")
     @ResponseBody
-    public SendResponse sendOtpV2(@RequestBody SendRequest request) throws URISyntaxException {
+    public SendResponse sendOtpV2(@RequestBody SendRequest request) throws Exception {
+        ExecutorService threadPool = Executors.newCachedThreadPool();
+        Future<SendResponse> futureTask = threadPool.submit(() -> otpServiceV2.sendOtp(request));
+
+        while (!futureTask.isDone()) {
+            System.out.println("FutureTask is not finished yet...");
+        }
+        SendResponse result = futureTask.get();
+
+        threadPool.shutdown();
         return otpServiceV2.sendOtp(request);
     }
 

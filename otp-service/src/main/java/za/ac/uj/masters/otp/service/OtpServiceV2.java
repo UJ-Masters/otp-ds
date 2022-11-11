@@ -23,7 +23,7 @@ public class OtpServiceV2 {
 
     private final Logger log = LoggerFactory.getLogger(OtpServiceV2.class);
     private static final Integer EXPIRE_MINS = 1;
-    private LoadingCache otpCache;
+    private final LoadingCache otpCache;
 
     private final CommunicationService communicationService;
 
@@ -91,7 +91,7 @@ public class OtpServiceV2 {
         ValidateResponse response = new ValidateResponse();
         if(!override){
             //Validate the Otp
-            Integer otpnum = Integer.getInteger(request.getOtp());
+            Integer otpNum = Integer.parseInt(request.getOtp());
 
             String username;
             if(DeliveryType.E == request.getDeliveryType()){
@@ -100,17 +100,16 @@ public class OtpServiceV2 {
                 username = request.getMobileNumber();
             }
 
-            if(otpnum >= 0){
+            if (otpNum >= 0) {
                 int serverOtp = getOtp(username);
-                if(serverOtp > 0){
-                    if(otpnum == serverOtp){
+                if (serverOtp > 0) {
+                    if (otpNum == serverOtp) {
                         clearOTP(username);
                         response.setResult(true);
-                    }
-                    else {
+                    } else {
                         response.setResult(false);
                     }
-                }else {
+                } else {
                     response.setResult(false);
                 }
             }else {

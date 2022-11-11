@@ -13,14 +13,12 @@ import java.util.Arrays;
 public class OtpConfig {
     @Bean
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
-
         RestTemplate restTemplate = builder.build();
 
         restTemplate
                 .setMessageConverters(Arrays
                         .asList(new StringHttpMessageConverter(),
                                 new FormHttpMessageConverter()));
-
         return builder.build();
     }
 }

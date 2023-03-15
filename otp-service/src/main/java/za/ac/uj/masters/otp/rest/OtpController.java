@@ -12,9 +12,6 @@ import za.ac.uj.masters.otp.service.OtpService;
 import za.ac.uj.masters.otp.service.OtpServiceV2;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 @RestController("/v1.0")
 @CrossOrigin({"*"})
@@ -24,8 +21,7 @@ public class OtpController {
     private final OtpServiceV2 otpServiceV2;
 
     @Autowired
-    public OtpController(final OtpService otpService,
-                         final OtpServiceV2 otpServiceV2) {
+    public OtpController(final OtpService otpService, final OtpServiceV2 otpServiceV2) {
         this.otpService = otpService;
         this.otpServiceV2 = otpServiceV2;
     }
@@ -38,8 +34,7 @@ public class OtpController {
 
     @PostMapping("/v1/validate")
     @ResponseBody
-    public ValidateResponse validateOtp(final HttpServletRequest servletRequest,
-                                        @RequestBody ValidateRequest request) {
+    public ValidateResponse validateOtp(final HttpServletRequest servletRequest, @RequestBody ValidateRequest request) {
         boolean override = Boolean.parseBoolean(servletRequest.getHeader("Override"));
         logger.info("isOverride on ? = {}", override);
         return otpService.validateOtp(request, override);
@@ -48,22 +43,12 @@ public class OtpController {
     @PostMapping("/v2/send")
     @ResponseBody
     public SendResponse sendOtpV2(@RequestBody SendRequest request) throws Exception {
-        ExecutorService threadPool = Executors.newCachedThreadPool();
-        Future<SendResponse> futureTask = threadPool.submit(() -> otpServiceV2.sendOtp(request));
-
-        while (!futureTask.isDone()) {
-            System.out.println("FutureTask is not finished yet...");
-        }
-        SendResponse result = futureTask.get();
-
-        threadPool.shutdown();
         return otpServiceV2.sendOtp(request);
     }
 
     @PostMapping("/v2/validate")
     @ResponseBody
-    public ValidateResponse validateOtpV2(final HttpServletRequest servletRequest,
-                                          @RequestBody ValidateRequest request) {
+    public ValidateResponse validateOtpV2(final HttpServletRequest servletRequest, @RequestBody ValidateRequest request) {
         boolean override = Boolean.parseBoolean(servletRequest.getHeader("Override"));
         logger.info("isOverride on ? = {}", override);
         return otpServiceV2.validateOtp(request, override);

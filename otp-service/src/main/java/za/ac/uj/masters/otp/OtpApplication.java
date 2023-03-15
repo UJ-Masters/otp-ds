@@ -19,12 +19,8 @@ public class OtpApplication {
 
     @Bean
     ApplicationListener<ApplicationReadyEvent> onApplicationReadyEventListener(ServerProperties serverProperties) {
-        return (evt) -> {
-            Integer port = serverProperties.getPort();
-
-            String contextPath = "otp";
-
-            logger.info("OTP-DS started: http://localhost:{}/{}/swagger-ui.html to use otp-ds", port, contextPath);
-        };
+        return evt ->
+                logger.info("OTP-DS started: http://localhost:{}{}/swagger-ui.html to use otp-ds",
+                        serverProperties.getPort(), serverProperties.getServlet().getContextPath());
     }
 }

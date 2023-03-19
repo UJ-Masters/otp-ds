@@ -13,7 +13,7 @@ import za.ac.uj.masters.otp.service.OtpServiceV2;
 
 import javax.servlet.http.HttpServletRequest;
 
-@RestController("/v1.0")
+@RestController()
 @CrossOrigin({"*"})
 public class OtpController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -26,15 +26,28 @@ public class OtpController {
         this.otpServiceV2 = otpServiceV2;
     }
 
-    @PostMapping("/v1/send")
+    @PostMapping("/send")
     @ResponseBody
     public SendResponse sendOtp(@RequestBody SendRequest request) {
         return otpService.sendOtp(request);
     }
 
+    @PostMapping("/validate")
+    @ResponseBody
+    public ValidateResponse validateOtp(HttpServletRequest servletRequest, @RequestBody ValidateRequest request) {
+        boolean override = Boolean.parseBoolean(servletRequest.getHeader("Override"));
+        return otpService.validateOtp(request, override);
+    }
+
+    @PostMapping("/v1/send")
+    @ResponseBody
+    public SendResponse sendOtpV1(@RequestBody SendRequest request) {
+        return otpService.sendOtp(request);
+    }
+
     @PostMapping("/v1/validate")
     @ResponseBody
-    public ValidateResponse validateOtp(final HttpServletRequest servletRequest, @RequestBody ValidateRequest request) {
+    public ValidateResponse validateOtpV1(final HttpServletRequest servletRequest, @RequestBody ValidateRequest request) {
         boolean override = Boolean.parseBoolean(servletRequest.getHeader("Override"));
         logger.info("isOverride on ? = {}", override);
         return otpService.validateOtp(request, override);
@@ -42,7 +55,7 @@ public class OtpController {
 
     @PostMapping("/v2/send")
     @ResponseBody
-    public SendResponse sendOtpV2(@RequestBody SendRequest request) throws Exception {
+    public SendResponse sendOtpV2(@RequestBody SendRequest request) {
         return otpServiceV2.sendOtp(request);
     }
 

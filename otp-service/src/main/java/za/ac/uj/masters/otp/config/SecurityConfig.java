@@ -10,6 +10,30 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+    /*@Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .cors()
+                .and()
+                .authorizeRequests()
+                .antMatchers("/actuator/**", "/health/**",
+                        "/swagger-ui/index.html", "/swagger-ui/**",
+                        "/swagger-ui.html", "/v3/api-docs/**", "/v2/api-docs/**")
+                .permitAll()
+                .and()
+                .cors()
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST,
+                        "/v1/send", "/v1/validate", "/v2/send", "/v2/validate")
+                .hasAuthority("SCOPE_write")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .oauth2ResourceServer()
+                .jwt();
+        return http.build();
+    }*/
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -17,16 +41,13 @@ public class SecurityConfig {
                 .cors()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/actuator/**", "/health/**",
-                        "/swagger-ui/**", "/swagger-ui/index.html",
-                        "/swagger-ui.html", "/v3/api-docs/**")
+                .antMatchers("/actuator/**", "/health/**", "/swagger-ui/**", "/swagger-ui.html")
                 .permitAll()
-                .and()
-                .cors()
-                .and()
+                .and().cors().and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,
-                        "/send/**", "/validate/**")
+                .antMatchers(HttpMethod.POST, "/send", "/validate",
+                        "v1/send", "v1/validate",
+                        "v2/send", "v2/validate")
                 .hasAuthority("SCOPE_write")
                 .anyRequest()
                 .authenticated()

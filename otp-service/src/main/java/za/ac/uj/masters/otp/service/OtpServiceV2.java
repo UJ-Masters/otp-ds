@@ -1,8 +1,5 @@
 package za.ac.uj.masters.otp.service;
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -16,50 +13,49 @@ import za.ac.uj.masters.otp.model.validate.ValidateResponse;
 
 import java.net.URISyntaxException;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 @Component
 public class OtpServiceV2 {
 
     private final Logger log = LoggerFactory.getLogger(OtpServiceV2.class);
     private static final Integer EXPIRE_MINS = 1;
-    private final LoadingCache otpCache;
+    //private final LoadingCache otpCache;
 
     private final CommunicationService communicationService;
 
     public OtpServiceV2(final CommunicationService communicationService){
         super();
         this.communicationService = communicationService;
-        otpCache = CacheBuilder.newBuilder().
+        /*otpCache = CacheBuilder.newBuilder().
                 expireAfterWrite(EXPIRE_MINS, TimeUnit.MINUTES)
                 .build(new CacheLoader() {
                     @Override
                     public Object load(Object o) {
                         return 0;
                     }
-                });
+                });*/
     }
 
     private int generateOTP(String key){
         Random random = new Random();
         int otp = 100000 + random.nextInt(900000);
-        otpCache.put(key, otp);
+        /*otpCache.put(key, otp);*/
         return otp;
     }
 
     private int getOtp(String key){
         try{
-            return (int) otpCache.get(key);
+            return 1;//otpCache.get(key);
         }catch (Exception e){
             return 0;
         }
     }
 
     private void clearOTP(String key){
-        otpCache.invalidate(key);
+        /*otpCache.invalidate(key);*/
     }
 
-    public SendResponse sendOtp(final SendRequest request) throws URISyntaxException {
+    public SendResponse sendOtp(final SendRequest request) {
         try {
             String deliveryAddress;
             if (request.getDeliveryType() == DeliveryType.E) {
@@ -75,8 +71,9 @@ public class OtpServiceV2 {
             SendResponse response = new SendResponse();
             response.setResult(true);
             return response;
-        }catch (URISyntaxException ex){
-         throw ex;
+        } catch (URISyntaxException ex) {
+            log.error(ex.getMessage());
+            throw new SomethingWentWrongException(ex.getMessage());
         } catch (RestClientException ex) {
             log.error(ex.getMessage());
             throw new SomethingWentWrongException(ex.getMessage());
@@ -101,7 +98,7 @@ public class OtpServiceV2 {
             }
 
             if (otpNum >= 0) {
-                int serverOtp = getOtp(username);
+                int serverOtp = 1;/*getOtp(username);*/
                 if (serverOtp > 0) {
                     if (otpNum == serverOtp) {
                         clearOTP(username);

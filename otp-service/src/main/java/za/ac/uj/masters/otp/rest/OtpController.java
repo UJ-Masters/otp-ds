@@ -19,6 +19,7 @@ public class OtpController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     private final OtpService otpService;
     private final OtpServiceV2 otpServiceV2;
+    private static final String OVERRIDE = "Override";
 
     @Autowired
     public OtpController(final OtpService otpService, final OtpServiceV2 otpServiceV2) {
@@ -35,7 +36,7 @@ public class OtpController {
     @PostMapping("/validate")
     @ResponseBody
     public ValidateResponse validateOtp(HttpServletRequest servletRequest, @RequestBody ValidateRequest request) {
-        boolean override = Boolean.parseBoolean(servletRequest.getHeader("Override"));
+        boolean override = Boolean.parseBoolean(servletRequest.getHeader(OVERRIDE));
         return otpService.validateOtp(request, override);
     }
 
@@ -48,7 +49,7 @@ public class OtpController {
     @PostMapping("/v1/validate")
     @ResponseBody
     public ValidateResponse validateOtpV1(final HttpServletRequest servletRequest, @RequestBody ValidateRequest request) {
-        boolean override = Boolean.parseBoolean(servletRequest.getHeader("Override"));
+        boolean override = Boolean.parseBoolean(servletRequest.getHeader(OVERRIDE));
         logger.info("isOverride on ? = {}", override);
         return otpService.validateOtp(request, override);
     }
@@ -62,7 +63,7 @@ public class OtpController {
     @PostMapping("/v2/validate")
     @ResponseBody
     public ValidateResponse validateOtpV2(final HttpServletRequest servletRequest, @RequestBody ValidateRequest request) {
-        boolean override = Boolean.parseBoolean(servletRequest.getHeader("Override"));
+        boolean override = Boolean.parseBoolean(servletRequest.getHeader(OVERRIDE));
         logger.info("isOverride on ? = {}", override);
         return otpServiceV2.validateOtp(request, override);
     }

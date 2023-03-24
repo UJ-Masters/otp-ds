@@ -18,7 +18,8 @@ public class SecurityConfig {
                 .and()
                 .authorizeRequests()
                 .antMatchers("/actuator/**", "/health/**",
-                        "/swagger-ui/**", "/swagger-ui/index.html",
+                        "/swagger-ui/index.html",
+                        "/swagger-ui/**",
                         "/swagger-ui.html", "/v3/api-docs/**")
                 .permitAll()
                 .and().cors().and()

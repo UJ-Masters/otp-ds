@@ -37,10 +37,16 @@
             <scope>test</scope>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>de.codecentric</groupId>
             <artifactId>spring-boot-admin-starter-client</artifactId>
             <version>2.7.0</version>
+        </dependency>-->
+
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+            <scope>runtime</scope>
         </dependency>
 
         <dependency>
@@ -52,6 +58,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
@@ -99,6 +106,17 @@
                 <dependency>
                     <groupId>za.ac.uj.masters.otp</groupId>
                     <artifactId>local</artifactId>
+                    <version>${project.version}</version>
+                </dependency>
+            </dependencies>
+        </profile>
+
+        <profile>
+            <id>env-docker</id>
+            <dependencies>
+                <dependency>
+                    <groupId>za.ac.uj.masters.otp</groupId>
+                    <artifactId>docker</artifactId>
                     <version>${project.version}</version>
                 </dependency>
             </dependencies>

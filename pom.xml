@@ -34,6 +34,11 @@
             </dependency>
             <dependency>
                 <groupId>za.ac.uj.masters.otp</groupId>
+                <artifactId>docker</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>za.ac.uj.masters.otp</groupId>
                 <artifactId>test</artifactId>
                 <version>${project.version}</version>
             </dependency>
